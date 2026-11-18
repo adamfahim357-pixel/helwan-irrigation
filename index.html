@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>مواعيد ري الترع ومناسيب المياه — ري حلوان</title>
+  <meta name="description" content="دليل مبسط وسهل للفلاحين لمعرفة مناسيب المياه ومواعيد مناوبات ري الترع في نطاق الإدارة العامة لري حلوان." />
+  <meta property="og:title" content="مواعيد ري الترع ومناسيب المياه — ري حلوان" />
+  <meta property="og:description" content="اعرف حالة الري ومنسوب المياه وموعد المناوبة القادمة لترعتك بسهولة." />
+  <meta property="og:type" content="website" />
+
+  <style>
+    :root {
+      --bg-page: #f3f7f2;
+      --bg-card: #ffffff;
+      --bg-soft: #e8f1e6;
+      --text-main: #162619;
+      --text-muted: #4b6350;
+      --primary: #1b6b3a;
+      --primary-dark: #134e2a;
+      --open-bg: #dcfce7;
+      --open-text: #14532d;
+      --open-border: #86efac;
+      --closed-bg: #fef3c7;
+      --closed-text: #78350f;
+      --closed-border: #fcd34d;
+      --low-bg: #fee2e2;
+      --low-text: #7f1d1d;
+      --border: #cfe0d1;
+      --radius: 16px;
+      --shadow: 0 6px 20px rgba(22, 38, 25, 0.07);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", Tahoma, Arial, sans-serif;
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      font-size: 17px;
+      line-height: 1.65;
+      padding: 18px 14px 48px;
+    }
+
+    .container {
+      max-width: 920px;
+      margin: 0 auto;
+    }
+
+    .top-header {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: #ffffff;
+      border-radius: var(--radius);
+      padding: 22px 20px;
+      box-shadow: var(--shadow);
+      margin-bottom: 18px;
+    }
+
+    .top-header .tag {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.18);
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .top-header h1 {
+      font-size: clamp(1.45rem, 4vw, 2rem);
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+
+    .top-header p {
+      font-size: 1rem;
+      opacity: 0.95;
+    }
+
+    .nav-bar {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .nav-btn {
+      font-family: inherit;
+      font-size: 1.05rem;
+      font-weight: 700;
+      min-height: 52px;
+      border-radius: var(--radius);
+      border: 2px solid var(--border);
+      background: var(--bg-card);
+      color: var(--text-main);
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .nav-btn.active {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #ffffff;
+    }
+
+    .nav-btn:focus-visible,
+    button:focus-visible,
+    input:focus-visible,
+    select:focus-visible {
+      outline: 3px solid #2563eb;
+      outline-offset: 2px;
+    }
+
+    .section-panel {
+      display: none;
+    }
+
+    .section-panel.active {
+      display: block;
+    }
+
+    .filter-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px;
+      box-shadow: var(--shadow);
+      margin-bottom: 18px;
+    }
+
+    .filter-row {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr auto;
+      gap: 10px;
+      align-items: center;
+    }
+
+    label.field-label {
+      display: block;
+      font-weight: 700;
+      font-size: 0.95rem;
+      margin-bottom: 6px;
+      color: var(--text-main);
+    }
+
+    input[type="text"],
+    input[type="number"],
+    select {
+      width: 100%;
+      min-height: 48px;
+      font-family: inherit;
+      font-size: 1rem;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1.5px solid var(--border);
+      background: #ffffff;
+      color: var(--text-main);
+    }
+
+    .btn {
+      font-family: inherit;
+      font-size: 1rem;
+      font-weight: 700;
+      min-height: 48px;
+      padding: 10px 16px;
+      border-radius: 12px;
+      border: 1.5px solid var(--border);
+      background: var(--bg-soft);
+      color: var(--text-main);
+      cursor: pointer;
+      transition: background 0.15s ease;
+    }
+
+    .btn:hover {
+      filter: brightness(0.97);
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #ffffff;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-dark);
+    }
+
+    .canal-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+    }
+
+    .canal-card {
+      background: var(--bg-card);
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .canal-card.is-open {
+      border-color: var(--open-border);
+    }
+
+    .canal-card.is-closed {
+      border-color: var(--closed-border);
+    }
+
+    .canal-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .canal-name {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--text-main);
+    }
+
+    .canal-area {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .status-pill {
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 0.92rem;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .status-open {
+      background: var(--open-bg);
+      color: var(--open-text);
+      border: 1px solid var(--open-border);
+    }
+
+    .status-closed {
+      background: var(--closed-bg);
+      color: var(--closed-text);
+      border: 1px solid var(--closed-border);
+    }
+
+    .info-box {
+      background: var(--bg-soft);
+      border-radius: 12px;
+      padding: 12px 14px;
+    }
+
+    .info-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 5px 0;
+      border-bottom: 1px dashed rgba(22, 38, 25, 0.14);
+      font-size: 0.98rem;
+    }
+
+    .info-row:last-child {
+      border-bottom: none;
+    }
+
+    .info-key {
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .info-val {
+      font-weight: 800;
+      color: var(--text-main);
+      text-align: left;
+    }
+
+    .level-good {
+      color: var(--primary-dark);
+    }
+
+    .level-low {
+      color: var(--low-text);
+    }
+
+    .farmer-tip {
+      font-size: 0.95rem;
+      background: #f8fafc;
+      border-right: 4px solid var(--primary);
+      padding: 8px 12px;
+      border-radius: 8px;
+      color: var(--text-main);
+    }
+
+    .form-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      box-shadow: var(--shadow);
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    .form-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .note-box {
+      margin-top: 16px;
+      background: var(--bg-soft);
+      border-radius: 12px;
+      padding: 14px;
+      font-size: 0.92rem;
+      color: var(--text-muted);
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--text-main);
+      color: #ffffff;
+      padding: 10px 18px;
+      border-radius: 999px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+      z-index: 50;
+    }
+
+    .toast.show {
+      opacity: 1;
+    }
+
+    @media (max-width: 680px) {
+      .filter-row {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="top-header">
+      <span class="tag">الإدارة العامة لري حلوان</span>
+      <h1>مواعيد مناوبات الري ومناسيب المياه</h1>
+      <p>اختر ترعتك أو قريتك لمعرفة هل المياه متاحة للري الآن، ومستوى المنسوب، وموعد المناوبة القادمة.</p>
+    </header>
+
+    <nav class="nav-bar" aria-label="أقسام الموقع">
+      <button id="tabCanalsBtn" class="nav-btn active" type="button">مواعيد ومناسيب الترع</button>
+      <button id="tabUpdateBtn" class="nav-btn" type="button">تحديث البيانات وحفظها</button>
+    </nav>
+
+    <!-- القسم الأول: عرض الترع بوضوح للفلاح -->
+    <main id="panel-canals" class="section-panel active">
+      <section class="filter-card" aria-label="البحث عن ترعة">
+        <div class="filter-row">
+          <div>
+            <label class="field-label" for="canalSelect">اختر الترعة</label>
+            <select id="canalSelect"></select>
+          </div>
+          <div>
+            <label class="field-label" for="searchInput">أو ابحث باسم القرية أو العزبة</label>
+            <input id="searchInput" type="text" placeholder="مثال: الصف، أطفيح، كفر العلو، عرب أبو ساعد..." />
+          </div>
+          <div style="align-self: end;">
+            <button id="showAllBtn" class="btn" type="button" style="width: 100%;">عرض كل الترع</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="canalsGrid" class="canal-grid" aria-live="polite"></section>
+    </main>
+
+    <!-- القسم الثاني: تحديث البيانات أو تصديرها -->
+    <section id="panel-update" class="section-panel" aria-label="تحديث بيانات المناسيب والمناوبات">
+      <div class="form-card">
+        <h2 style="font-size: 1.25rem; margin-bottom: 6px;">تحديث بيانات ترعة</h2>
+        <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 16px;">
+          يمكن لمسؤول المتابعة أو مهندس الري تحديث حالة المناوبة ومنسوب المياه، وسيتم حفظ التعديلات على هذا الجهاز تلقائياً.
+        </p>
+
+        <form id="updateCanalForm">
+          <div class="form-grid">
+            <div>
+              <label class="field-label" for="editCanalSelect">الترعة</label>
+              <select id="editCanalSelect"></select>
+            </div>
+
+            <div>
+              <label class="field-label" for="editStatus">حالة الري الآن</label>
+              <select id="editStatus">
+                <option value="open">مفتوحة للري الآن</option>
+                <option value="closed">مقفولة (فترة بطالة / مناوبة)</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="field-label" for="editLevel">منسوب المياه الحالي (متر)</label>
+              <input id="editLevel" type="number" step="0.05" min="0" max="50" required />
+            </div>
+
+            <div>
+              <label class="field-label" for="editLevelState">حالة المنسوب</label>
+              <select id="editLevelState">
+                <option value="good">مناسب للري</option>
+                <option value="low">منخفض (يحتاج طلمبات / متابعة)</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="field-label" for="editCurrentTurn">المناوبة الحالية</label>
+              <input id="editCurrentTurn" type="text" required />
+            </div>
+
+            <div>
+              <label class="field-label" for="editNextTurn">موعد المناوبة القادمة</label>
+              <input id="editNextTurn" type="text" required />
+            </div>
+          </div>
+
+          <div style="margin-bottom: 16px;">
+            <label class="field-label" for="editTip">تنبيه بسيط للفلاحين</label>
+            <input id="editTip" type="text" required />
+          </div>
+
+          <div class="form-actions">
+            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+              <button class="btn btn-primary" type="submit">حفظ التعديلات</button>
+              <button id="resetDefaultsBtn" class="btn" type="button">استعادة البيانات الافتراضية</button>
+            </div>
+
+            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+              <button id="exportJsonBtn" class="btn" type="button">تصدير ملف JSON</button>
+              <label class="btn" style="cursor: pointer; display: inline-flex; align-items: center;">
+                استيراد JSON
+                <input id="importJsonInput" type="file" accept=".json" hidden />
+              </label>
+            </div>
+          </div>
+        </form>
+
+        <div class="note-box">
+          <strong>تنويه مهم:</strong> القيم المعروضة افتراضياً هي بيانات نموذجية استرشادية لسهولة التجربة والنشر على GitHub Pages، ويُرجى الاعتماد على نشرات الإدارة العامة لري حلوان الرسمية ومهندس الري المختص لتأكيد مواعيد الفتح والقفل الفعلية في أرضك.
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    (() => {
+      const STORAGE_KEY = "helwan_irrigation_canals_v1";
+
+      const defaultCanals = [
+        {
+          id: "helwan-west-1",
+          name: "جنابية كفر العلو وعرب غنيم",
+          villages: "كفر العلو، عرب غنيم، حلوان البلد",
+          status: "open",
+          level: "19.85",
+          levelState: "good",
+          currentTurn: "دور التشغيل الحالي (يبدأ الثلاثاء 6 ص)",
+          nextTurn: "الجمعة 6 ص ولمدة 4 أيام",
+          tip: "المياه متاحة الآن ومنسوبها جيد؛ يُفضل الري في الصباح الباكر وتجنب إهدار المياه."
+        },
+        {
+          id: "saff-main",
+          name: "ترعة الصف الرئيسية وفروعها",
+          villages: "الصف، الأقواز، الشرفا، عرب أبو ساعد",
+          status: "closed",
+          level: "18.20",
+          levelState: "low",
+          currentTurn: "فترة بطالة وقفل للمناوبة",
+          nextTurn: "السبت 7 ص ولمدة 5 أيام",
+          tip: "الترعة في فترة قفل حالياً؛ جهّز مساقيك وخطوط الري قبل فتح المناوبة القادمة."
+        },
+        {
+          id: "atfih-east",
+          name: "جنابية أطفيح الشرقية",
+          villages: "أطفيح، الكريمات، منشأة سليمان",
+          status: "open",
+          level: "19.40",
+          levelState: "good",
+          currentTurn: "دور الري المستمر للأراضي المرتفعة",
+          nextTurn: "الأربعاء القادم 8 ص",
+          tip: "المنسوب مناسب للري المباشر؛ التزم بالدور المحدد لزمام قريتك."
+        },
+        {
+          id: "masara-tebbin",
+          name: "ترعة التبين والمعصرة",
+          villages: "التبين، المعصرة، عرب راشد",
+          status: "closed",
+          level: "17.95",
+          levelState: "low",
+          currentTurn: "فترة بطالة وصيانة وتطهير",
+          nextTurn: "الأحد 6 ص ولمدة 3 أيام",
+          tip: "يتم حالياً متابعة المناسيب وتطهير بعض النقاط؛ يُنصح باستخدام ماكينة رفع إذا كان أرضك مرتفعة."
+        }
+      ];
+
+      function loadCanals() {
+        try {
+          const raw = localStorage.getItem(STORAGE_KEY);
+          if (!raw) return structuredCloneFallback(defaultCanals);
+          const parsed = JSON.parse(raw);
+          if (!Array.isArray(parsed) || parsed.length === 0) {
+            return structuredCloneFallback(defaultCanals);
+          }
+          return parsed;
+        } catch (_) {
+          return structuredCloneFallback(defaultCanals);
+        }
+      }
+
+      function structuredCloneFallback(arr) {
+        return JSON.parse(JSON.stringify(arr));
+      }
+
+      function saveCanals(data) {
+        try {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+        } catch (_) {}
+      }
+
+      let canals = loadCanals();
+
+      const toastEl = document.getElementById("toast");
+      let toastTimer = null;
+      function showToast(msg) {
+        toastEl.textContent = msg;
+        toastEl.classList.add("show");
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => toastEl.classList.remove("show"), 2400);
+      }
+
+      // التبديل بين قسم العرض وقسم التحديث
+      const tabCanalsBtn = document.getElementById("tabCanalsBtn");
+      const tabUpdateBtn = document.getElementById("tabUpdateBtn");
+      const panelCanals = document.getElementById("panel-canals");
+      const panelUpdate = document.getElementById("panel-update");
+
+      function switchPanel(panelName) {
+        const isCanals = panelName === "canals";
+        tabCanalsBtn.classList.toggle("active", isCanals);
+        tabUpdateBtn.classList.toggle("active", !isCanals);
+        panelCanals.classList.toggle("active", isCanals);
+        panelUpdate.classList.toggle("active", !isCanals);
+      }
+
+      tabCanalsBtn.addEventListener("click", () => switchPanel("canals"));
+      tabUpdateBtn.addEventListener("click", () => switchPanel("update"));
+
+      // عناصر العرض والبحث
+      const canalSelect = document.getElementById("canalSelect");
+      const searchInput = document.getElementById("searchInput");
+      const showAllBtn = document.getElementById("showAllBtn");
+      const canalsGrid = document.getElementById("canalsGrid");
+
+      // عناصر نموذج التحديث
+      const editCanalSelect = document.getElementById("editCanalSelect");
+      const editStatus = document.getElementById("editStatus");
+      const editLevel = document.getElementById("editLevel");
+      const editLevelState = document.getElementById("editLevelState");
+      const editCurrentTurn = document.getElementById("editCurrentTurn");
+      const editNextTurn = document.getElementById("editNextTurn");
+      const editTip = document.getElementById("editTip");
+      const updateCanalForm = document.getElementById("updateCanalForm");
+      const resetDefaultsBtn = document.getElementById("resetDefaultsBtn");
+      const exportJsonBtn = document.getElementById("exportJsonBtn");
+      const importJsonInput = document.getElementById("importJsonInput");
+
+      function populateSelects(selectedId = "") {
+        const previousFilter = selectedId || canalSelect.value;
+
+        canalSelect.innerHTML = `<option value="all">كل الترع في نطاق ري حلوان</option>`;
+        editCanalSelect.innerHTML = "";
+
+        canals.forEach((c) => {
+          const opt1 = document.createElement("option");
+          opt1.value = c.id;
+          opt1.textContent = c.name;
+          canalSelect.appendChild(opt1);
+
+          const opt2 = document.createElement("option");
+          opt2.value = c.id;
+          opt2.textContent = c.name;
+          editCanalSelect.appendChild(opt2);
+        });
+
+        if (previousFilter && Array.from(canalSelect.options).some((o) => o.value === previousFilter)) {
+          canalSelect.value = previousFilter;
+        }
+      }
+
+      function renderCanals() {
+        const selectedId = canalSelect.value;
+        const query = searchInput.value.trim().toLowerCase();
+
+        const filtered = canals.filter((c) => {
+          const matchesSelect = selectedId === "all" || c.id === selectedId;
+          const matchesQuery =
+            !query ||
+            c.name.toLowerCase().includes(query) ||
+            c.villages.toLowerCase().includes(query);
+          return matchesSelect && matchesQuery;
+        });
+
+        canalsGrid.innerHTML = "";
+
+        if (filtered.length === 0) {
+          canalsGrid.innerHTML = `
+            <div class="canal-card" style="grid-column: 1 / -1; text-align: center;">
+              <p style="font-weight: 700;">لا توجد نتائج مطابقة للبحث الحالي.</p>
+              <p style="color: var(--text-muted); font-size: 0.95rem;">اضغط على "عرض كل الترع" للعودة للقائمة الكاملة.</p>
+            </div>
+          `;
+          return;
+        }
+
+        filtered.forEach((canal) => {
+          const isOpen = canal.status === "open";
+          const isGoodLevel = canal.levelState === "good";
+
+          const card = document.createElement("article");
+          card.className = `canal-card ${isOpen ? "is-open" : "is-closed"}`;
+
+          const head = document.createElement("div");
+          head.className = "canal-head";
+
+          const titleWrap = document.createElement("div");
+          const h3 = document.createElement("h3");
+          h3.className = "canal-name";
+          h3.textContent = canal.name;
+
+          const pVillages = document.createElement("p");
+          pVillages.className = "canal-area";
+          pVillages.textContent = `القرى والزمام: ${canal.villages}`;
+
+          titleWrap.append(h3, pVillages);
+
+          const pill = document.createElement("span");
+          pill.className = `status-pill ${isOpen ? "status-open" : "status-closed"}`;
+          pill.textContent = isOpen ? "مفتوحة للري الآن" : "مقفولة (بطالة)";
+
+          head.append(titleWrap, pill);
+
+          const infoBox = document.createElement("div");
+          infoBox.className = "info-box";
+
+          const addRow = (label, valueText, extraClass = "") => {
+            const row = document.createElement("div");
+            row.className = "info-row";
+            const k = document.createElement("span");
+            k.className = "info-key";
+            k.textContent = label;
+            const v = document.createElement("span");
+            v.className = `info-val ${extraClass}`;
+            v.textContent = valueText;
+            row.append(k, v);
+            infoBox.appendChild(row);
+          };
+
+          addRow(
+            "منسوب المياه",
+            `${canal.level} م (${isGoodLevel ? "مناسب للري" : "منخفض"})`,
+            isGoodLevel ? "level-good" : "level-low"
+          );
+          addRow("وضع المناوبة الحالي", canal.currentTurn);
+          addRow("المناوبة القادمة", canal.nextTurn);
+
+          const tip = document.createElement("div");
+          tip.className = "farmer-tip";
+          tip.textContent = canal.tip;
+
+          card.append(head, infoBox, tip);
+          canalsGrid.appendChild(card);
+        });
+      }
+
+      function fillEditForm(canalId) {
+        const canal = canals.find((c) => c.id === canalId) || canals[0];
+        if (!canal) return;
+        editCanalSelect.value = canal.id;
+        editStatus.value = canal.status;
+        editLevel.value = canal.level;
+        editLevelState.value = canal.levelState;
+        editCurrentTurn.value = canal.currentTurn;
+        editNextTurn.value = canal.nextTurn;
+        editTip.value = canal.tip;
+      }
+
+      canalSelect.addEventListener("change", renderCanals);
+      searchInput.addEventListener("input", renderCanals);
+
+      showAllBtn.addEventListener("click", () => {
+        canalSelect.value = "all";
+        searchInput.value = "";
+        renderCanals();
+      });
+
+      editCanalSelect.addEventListener("change", () => {
+        fillEditForm(editCanalSelect.value);
+      });
+
+      updateCanalForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const targetId = editCanalSelect.value;
+        const idx = canals.findIndex((c) => c.id === targetId);
+        if (idx === -1) return;
+
+        canals[idx] = {
+          ...canals[idx],
+          status: editStatus.value,
+          level: String(editLevel.value).trim(),
+          levelState: editLevelState.value,
+          currentTurn: editCurrentTurn.value.trim(),
+          nextTurn: editNextTurn.value.trim(),
+          tip: editTip.value.trim()
+        };
+
+        saveCanals(canals);
+        renderCanals();
+        showToast("تم حفظ تحديثات الترعة بنجاح");
+      });
+
+      resetDefaultsBtn.addEventListener("click", () => {
+        canals = structuredCloneFallback(defaultCanals);
+        saveCanals(canals);
+        populateSelects("all");
+        fillEditForm(canals[0].id);
+        renderCanals();
+        showToast("تمت استعادة البيانات الافتراضية");
+      });
+
+      exportJsonBtn.addEventListener("click", () => {
+        const blob = new Blob([JSON.stringify(canals, null, 2)], { type: "application/json" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "helwan-irrigation-canals.json";
+        a.click();
+        URL.revokeObjectURL(url);
+        showToast("تم تحميل ملف البيانات JSON");
+      });
+
+      importJsonInput.addEventListener("change", (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = () => {
+          try {
+            const imported = JSON.parse(reader.result);
+            if (!Array.isArray(imported) || imported.length === 0) {
+              throw new Error("Invalid format");
+            }
+            canals = imported;
+            saveCanals(canals);
+            populateSelects("all");
+            fillEditForm(canals[0].id);
+            renderCanals();
+            showToast("تم استيراد بيانات الترع بنجاح");
+          } catch (_) {
+            showToast("تعذر قراءة الملف؛ تأكد من صيغة JSON");
+          }
+        };
+        reader.readAsText(file);
+        importJsonInput.value = "";
+      });
+
+      populateSelects("all");
+      fillEditForm(canals[0].id);
+      renderCanals();
+    })();
+  </script>
+</body>
+</html>
